@@ -1,7 +1,3 @@
-body {
-  font-family: "Nokia Pure Text Regular", Arial, sans-serif;
-}
-
 .container {
   display: flex;
   flex-direction: column;
