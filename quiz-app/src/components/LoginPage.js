@@ -39,7 +39,7 @@ class LoginPage extends Component {
               <Input
                 type="email"
                 name="email"
-                id="exampleEmail"
+                id="email"
                 placeholder="me@email.com"
               />
             </FormGroup>
@@ -57,30 +57,6 @@ class LoginPage extends Component {
           </Col>
           <Button onClick={this.handleSubmit}>Submit</Button>
         </Form>
-
-        {/*<div id="loginFormContent">*/}
-        {/*<h2 className="loginHeader">Sign In</h2>*/}
-        {/*          <form onSubmit={this.handleSubmit}>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="email"
-              required={true}
-              onChange={this.handleChange}
-              value={this.state.email}
-            />
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="password"
-              required={true}
-              onChange={this.handleChange}
-              value={this.state.password}
-            />
-            <input type="submit" value="Submit" />
-          </form>*/}
       </Container>
     );
   }
