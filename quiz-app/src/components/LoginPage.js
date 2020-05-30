@@ -1,5 +1,14 @@
 import React, { Component } from "react";
 import "../styles/LoginPage.css";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+} from "reactstrap";
 
 class LoginPage extends Component {
   state = {
@@ -21,10 +30,37 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div id="loginFormContent">
-          <h2 className="loginHeader">Sign In</h2>
-          <form onSubmit={this.handleSubmit}>
+      <Container className="App">
+        <h2 className="loginTitle">Sign In</h2>
+        <Form className="form">
+          <Col>
+            <FormGroup row>
+              <Label>Email</Label>
+              <Input
+                type="email"
+                name="email"
+                id="exampleEmail"
+                placeholder="me@email.com"
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup row>
+              <Label for="password">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="********"
+              />
+            </FormGroup>
+          </Col>
+          <Button onClick={this.handleSubmit}>Submit</Button>
+        </Form>
+
+        {/*<div id="loginFormContent">*/}
+        {/*<h2 className="loginHeader">Sign In</h2>*/}
+        {/*          <form onSubmit={this.handleSubmit}>
             <input
               type="email"
               id="email"
@@ -44,9 +80,8 @@ class LoginPage extends Component {
               value={this.state.password}
             />
             <input type="submit" value="Submit" />
-          </form>
-        </div>
-      </div>
+          </form>*/}
+      </Container>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/QuizPage.css";
 import Question from "./Question";
+import Button from "reactstrap/es/Button";
 
 class QuizPage extends Component {
   state = {
@@ -8,6 +9,7 @@ class QuizPage extends Component {
     currentQuestion: 0,
     next: true,
     loading: true,
+    score: 0,
   };
 
   getQuizList = () => {
@@ -21,7 +23,6 @@ class QuizPage extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.quizList);
-        // this.loadQuizData(data);
         this.setState({
           quizList: data.quizList,
         });
@@ -35,17 +36,6 @@ class QuizPage extends Component {
     this.getQuizList();
   }
 
-  loadQuizData(data) {
-    const { currentQuestion } = this.state;
-    this.setState(() => {
-      return {
-        options: data.quizList[currentQuestion].options,
-        quiz: data.quizList[currentQuestion].quiz,
-        correctAnswer: data.quizList[currentQuestion].correct,
-      };
-    });
-  }
-
   nextQuestion = () => {
     console.log("currentQuestion index:" + this.state.currentQuestion);
     this.setState({
@@ -53,40 +43,57 @@ class QuizPage extends Component {
     });
   };
 
+  prevQuestion = () => {
+    this.setState({
+      currentQuestion: this.state.currentQuestion - 1,
+    });
+  };
+
+  displayScores = () => {
+    console.log("TODO: displayScores");
+  };
+
   render() {
+    const { currentQuestion, quizList } = this.state;
     return (
-      <div className="container">
-        <div className="title">Word Quiz</div>
+      <div className="quizPageContainer">
+        <div className="quizTitle">Question {currentQuestion + 1}</div>
 
-        {this.state.quizList.length > 0 && (
-          <Question
-            quizData={this.state.quizList[this.state.currentQuestion]}
-          />
-        )}
-
-        <div>
-          <button enabled={"true"} onClick={this.nextQuestion}>
-            Next
-          </button>
+        <div className="questionArea">
+          {this.state.quizList.length > 0 && (
+            <Question quizData={quizList[currentQuestion]} />
+          )}
         </div>
-        {/*        {this.state.quizList.length > 0 &&
-          this.state.quizList.map(({ quiz, correct, options }, index) => (
-            <div className="quizPage" key={index}>
-              <div className="question">{quiz}</div>
-              {options.map((answerText, index) => (
-                <label className="options" key={answerText}>
-                  <input
-                    name={"answer"}
-                    type={"radio"}
-                    key={index}
-                    id={answerText}
-                    value={answerText}
-                  />
-                  {answerText}
-                </label>
-              ))}
-            </div>
-          ))}*/}
+
+        <div className="navBtnContainer">
+          {currentQuestion !== 0 && currentQuestion < quizList.length - 1 && (
+            <Button
+              size={"md"}
+              className="navBtn prev"
+              onClick={this.prevQuestion}
+            >
+              Previous
+            </Button>
+          )}
+          {currentQuestion < quizList.length - 1 && (
+            <Button
+              size={"md"}
+              className="navBtn next"
+              onClick={this.nextQuestion}
+            >
+              Next
+            </Button>
+          )}
+          {currentQuestion === quizList.length - 1 && (
+            <Button
+              size={"md"}
+              className="navBtn finish"
+              onClick={this.displayScores}
+            >
+              Check scores
+            </Button>
+          )}
+        </div>
       </div>
     );
   }
