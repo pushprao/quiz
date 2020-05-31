@@ -25,3 +25,5 @@ Builds the app for production to the `build` folder.<br />
 - uses redux to store the state
 
 - redux-logger middleware to log actions and states
+
+- redux-saga middleware for serving async calls in redux actions

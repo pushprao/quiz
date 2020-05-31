@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import QuizPage from "./components/QuizPage";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
 import { connect } from "react-redux";
 
@@ -15,29 +15,34 @@ class QuizApp extends Component {
   }
 
   render() {
-    console.log("questions of QuizApp: ", this.props.questions);
     return (
       <Router>
-        <Switch>
-          <Route path="/" exact component={LoginPage} />
-          <Route path="/quiz" component={QuizPage} />
-        </Switch>
+        <Route path="/" exact component={LoginPage} />
+        <Route
+          path="/quiz"
+          component={() => (
+            <QuizPage
+              questions={this.props.questions}
+              loading={this.props.loading}
+            />
+          )}
+        />
       </Router>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { questions: state.quiz.questions };
+  return {
+    questions: state.quiz.questions,
+    loading: state.quiz.loading,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     loadQuestions: () => {
-      return dispatch({
-        type: "FETCH_QUIZ_LIST",
-        data: ["1", "2"],
-      });
+      return dispatch({ type: "FETCH_QUIZ_LIST" });
     },
   };
 };
