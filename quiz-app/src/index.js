@@ -4,29 +4,14 @@ import "./styles/index.css";
 import QuizApp from "./QuizApp";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { QuizReducer } from "./reducers/QuizReducers";
-import { logger } from "redux-logger";
-
-const reducers = combineReducers({ quiz: QuizReducer });
-
-const middleware = applyMiddleware(logger);
-
-const store = createStore(reducers, middleware);
-
-store.subscribe(() => {
-  console.log("store changed ", store.getState());
-});
-
-// test actions
-// store.dispatch({
-//   type: "FETCH_QUIZ_LIST",
-//   data: ["aaa", "bbb"],
-// });
+import { Provider } from "react-redux";
+import store from "./store";
 
 ReactDOM.render(
   <React.StrictMode>
-    <QuizApp />
+    <Provider store={store}>
+      <QuizApp />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

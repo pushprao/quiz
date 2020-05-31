@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   questions: [],
 };
-export const QuizReducer = (state = INITIAL_STATE, action) => {
+export function QuizReducer(state = INITIAL_STATE, action) {
   console.log(
     "recieved action:" + action.type + " with payload:" + action.data
   );
@@ -14,4 +14,4 @@ export const QuizReducer = (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
-};
+}
