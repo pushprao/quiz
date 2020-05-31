@@ -9,6 +9,7 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import { Redirect } from "react-router-dom";
 
 class LoginPage extends Component {
   state = {
@@ -63,6 +64,7 @@ class LoginPage extends Component {
                 valid={this.state.validate.emailState === "has-success"}
                 invalid={this.state.validate.emailState === "has-danger"}
                 onChange={(e) => {
+                  this.handleChange(e);
                   this.validateEmail(e);
                 }}
                 required
