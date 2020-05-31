@@ -1,0 +1,70 @@
+.resultsSection {
+  text-align: center;
+}
+
+.resultsSection h2 {
+  text-align: left;
+  border-bottom: 1px solid;
+}
+
+.resultsSection .scoring {
+  text-align: left;
+  /*margin-top: -8px;*/
+}
+
+.resultsSection .result {
+  text-align: left;
+  position: relative;
+  margin: 50px 0;
+}
+
+.resultsSection .question {
+  font-weight: bold;
+}
+
+.resultsSection .correctAnswer {
+  margin: 10px 0;
+  color: #0a0a0a;
+}
+
+.resultsSection .result:before {
+  font-size: 2em;
+  position: absolute;
+  left: -50px;
+}
+
+.resultsSection .result.correct:before {
+  content: "\002714";
+  color: #7aca7c;
+  top: -20px;
+}
+
+.resultsSection .result.incorrect:before {
+  content: "\2716";
+  color: #e96a6a;
+  top: -18px;
+}
+
+.resultsSection .correctAnswer b {
+  color: #545454;
+  font-size: 1.1em;
+}
+
+.resultsSection .explanation {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+.resultsSection .badge {
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 3em;
+  color: white;
+  text-shadow: 0 0 5px black;
+  border: 14px solid #205;
+  border-radius: 100%;
+  background-position: center center;
+  box-shadow: 5px 5px 15px black;
+}

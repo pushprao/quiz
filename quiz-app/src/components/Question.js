@@ -1,24 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import { FormGroup, Input, Label } from "reactstrap";
 
-class Question extends Component {
-  render() {
-    const { quiz, options } = this.props.quizData;
-
-    return (
-      <FormGroup tag="fieldset">
+const Question = (props) => {
+  const { quiz, options } = props.quizData;
+  return (
+    <>
+      <div className="quizTitle">Question {props.questionId}</div>
+      <FormGroup>
         <div className="question">{quiz}</div>
         {options.map((answerText, index) => (
-          <FormGroup check>
-            <Label check>
-              <Input type="radio" name="answer" />
+          <FormGroup key={index}>
+            <Label check className={"options"}>
+              <Input
+                type="radio"
+                name="answer"
+                id={index}
+                onChange={(e) => {
+                  props.updateScore(e, index);
+                }}
+              />
               {answerText}
             </Label>
           </FormGroup>
         ))}
       </FormGroup>
-    );
-  }
-}
+    </>
+  );
+};
 
 export default Question;

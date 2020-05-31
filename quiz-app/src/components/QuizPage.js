@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import "../styles/QuizPage.css";
+import "../styles/quiz.css";
 import Question from "./Question";
 import Button from "reactstrap/es/Button";
+import Results from "./Results";
+import mockResponse from "../mock/quizList";
 
 class QuizPage extends Component {
   state = {
@@ -10,6 +12,7 @@ class QuizPage extends Component {
     next: true,
     loading: true,
     score: 0,
+    showResults: false,
   };
 
   getQuizList = () => {
@@ -33,11 +36,12 @@ class QuizPage extends Component {
   };
 
   componentDidMount() {
-    this.getQuizList();
+    // this.getQuizList();
+    // Uncomment to work in offline mode
+    this.setState({ quizList: mockResponse.quizList });
   }
 
   nextQuestion = () => {
-    console.log("currentQuestion index:" + this.state.currentQuestion);
     this.setState({
       currentQuestion: this.state.currentQuestion + 1,
     });
@@ -50,18 +54,32 @@ class QuizPage extends Component {
   };
 
   displayScores = () => {
-    console.log("TODO: displayScores");
+    console.log("TODO: displayScores:" + this.state.score);
+    this.setState({ showResults: true });
+  };
+
+  updateScore = (event, index) => {
+    console.log("Selected Answer:" + index);
+    if (this.state.quizList[this.state.currentQuestion].correct === index) {
+      this.setState({ score: this.state.score + 1 });
+    }
   };
 
   render() {
     const { currentQuestion, quizList } = this.state;
+    console.log("Question: " + (currentQuestion + 1));
     return (
       <div className="quizPageContainer">
-        <div className="quizTitle">Question {currentQuestion + 1}</div>
-
         <div className="questionArea">
-          {this.state.quizList.length > 0 && (
-            <Question quizData={quizList[currentQuestion]} />
+          {this.state.showResults && (
+            <Results quizList={this.state.quizList} score={this.state.score} />
+          )}
+          {!this.state.showResults && this.state.quizList.length > 0 && (
+            <Question
+              quizData={quizList[currentQuestion]}
+              updateScore={this.updateScore}
+              questionId={currentQuestion + 1}
+            />
           )}
         </div>
 
@@ -84,7 +102,7 @@ class QuizPage extends Component {
               Next
             </Button>
           )}
-          {currentQuestion === quizList.length - 1 && (
+          {!this.state.showResults && currentQuestion === quizList.length - 1 && (
             <Button
               size={"md"}
               className="navBtn finish"

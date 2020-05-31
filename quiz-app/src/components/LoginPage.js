@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../styles/LoginPage.css";
+import "../styles/login.css";
 import {
   Button,
   Col,
@@ -23,7 +23,7 @@ class LoginPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("event: " + this.state.email);
+    console.log("Login with email:" + this.state.email);
     const { history } = this.props;
     history.push("/quiz");
   };
