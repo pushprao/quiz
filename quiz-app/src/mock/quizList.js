@@ -26,6 +26,21 @@ const mockResponse = {
       quiz: "Who was the man of the match of the 1983 World Cup Final ?",
       options: ["Anil Kumble", "Mohinder Amarnath", "Kapil Dev"],
     },
+    {
+      correct: 1,
+      quiz: "Who was the man of the match of the 1983 World Cup Final ?",
+      options: ["Anil Kumble", "Mohinder Amarnath", "Kapil Dev"],
+    },
+    {
+      correct: 1,
+      quiz: "Who was the man of the match of the 1983 World Cup Final ?",
+      options: ["Anil Kumble", "Mohinder Amarnath", "Kapil Dev"],
+    },
+    {
+      correct: 1,
+      quiz: "Who was the man of the match of the 1983 World Cup Final ?",
+      options: ["Anil Kumble", "Mohinder Amarnath", "Kapil Dev"],
+    },
   ],
 };
 
