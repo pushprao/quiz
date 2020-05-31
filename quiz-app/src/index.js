@@ -6,16 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { QuizReducer } from "./reducers/QuizReducers";
+import { logger } from "redux-logger";
 
 const reducers = combineReducers({ quiz: QuizReducer });
 
-//logger middleware
-const logger = (store) => (next) => (action) => {
-  console.log("action fired ", action);
-  next(action);
-};
-
 const middleware = applyMiddleware(logger);
+
 const store = createStore(reducers, middleware);
 
 store.subscribe(() => {
