@@ -39,10 +39,8 @@ class QuizPage extends Component {
   };
 
   render() {
-    console.log("loading :", this.props.loading);
     const { currentQuestion } = this.state;
     const { questions } = this.props;
-    console.log("Question: " + (currentQuestion + 1));
     return (
       <div className="quizPageContainer">
         {!this.props.loading && (
@@ -51,7 +49,7 @@ class QuizPage extends Component {
               {this.state.showResults && (
                 <Results quizList={questions} score={this.state.score} />
               )}
-              {!this.state.showResults && questions.length > 0 && (
+              {!this.state.showResults && questions.length && (
                 <Question
                   quizData={questions[currentQuestion]}
                   updateScore={this.updateScore}
