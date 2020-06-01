@@ -20,6 +20,12 @@ class LoginPage extends Component {
     },
   };
 
+  emailRef = React.createRef("emailID");
+
+  componentDidMount() {
+    this.emailRef.current.focus();
+  }
+
   handleChange = async (event) => {
     const { target } = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -67,6 +73,7 @@ class LoginPage extends Component {
                   this.validateEmail(e);
                 }}
                 required
+                innerRef={this.emailRef}
               />
             </FormGroup>
           </Col>
