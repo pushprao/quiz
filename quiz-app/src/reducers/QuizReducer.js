@@ -2,6 +2,8 @@ const INITIAL_STATE = {
   questions: [],
   error: null,
   loading: false,
+  quizCompleted: false,
+  score: 0,
 };
 export function QuizReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -23,6 +25,16 @@ export function QuizReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         loading: true,
+      };
+    case "CORRECT_ANSWER":
+      return {
+        ...state,
+        score: state.score + 1,
+      };
+    case "QUIZ_COMPLETED":
+      return {
+        ...state,
+        quizCompleted: true,
       };
     default:
       return state;

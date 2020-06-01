@@ -14,8 +14,6 @@ class QuizPage extends Component {
   state = {
     currentQuestion: 0,
     next: true,
-    score: 0,
-    showResults: false,
   };
 
   nextQuestion = () => {
@@ -31,14 +29,12 @@ class QuizPage extends Component {
   };
 
   displayScores = () => {
-    console.log("TODO: displayScores:" + this.state.score);
-    this.setState({ showResults: true });
+    this.props.showResutls();
   };
 
-  updateScore = (event, index) => {
-    console.log("Selected Answer:" + index);
+  selectedAnswer = (event, index) => {
     if (this.props.questions[this.state.currentQuestion].correct === index) {
-      this.setState({ score: this.state.score + 1 });
+      this.props.updateScore();
     }
   };
 
@@ -48,23 +44,23 @@ class QuizPage extends Component {
 
   render() {
     const { currentQuestion } = this.state;
-    const { questions } = this.props;
+    const { questions, quizCompleted } = this.props;
     return (
       <div className="quizPageContainer">
         {!this.props.loading && (
           <>
             <div className="questionArea">
-              {this.state.showResults && (
+              {quizCompleted && (
                 <Results
                   quizList={questions}
-                  score={this.state.score}
+                  score={this.props.score}
                   userId={this.props.userId}
                 />
               )}
-              {!this.state.showResults && questions.length && (
+              {!quizCompleted && questions.length && (
                 <Question
                   quizData={questions[currentQuestion]}
-                  updateScore={this.updateScore}
+                  selectedAnswer={this.selectedAnswer}
                   questionId={currentQuestion + 1}
                 />
               )}
@@ -88,16 +84,15 @@ class QuizPage extends Component {
                   Next
                 </Button>
               )}
-              {!this.state.showResults &&
-                currentQuestion === questions.length - 1 && (
-                  <Button
-                    size={"md"}
-                    className="navBtn finish"
-                    onClick={this.displayScores}
-                  >
-                    Check scores
-                  </Button>
-                )}
+              {!quizCompleted && currentQuestion === questions.length - 1 && (
+                <Button
+                  size={"md"}
+                  className="navBtn finish"
+                  onClick={this.displayScores}
+                >
+                  Check scores
+                </Button>
+              )}
             </div>
           </>
         )}
@@ -113,6 +108,8 @@ const mapStateToProps = (state) => {
     questions: state.quiz.questions,
     loading: state.quiz.loading,
     userId: state.login.email,
+    quizCompleted: state.quiz.quizCompleted,
+    score: state.quiz.score,
   };
 };
 
@@ -120,6 +117,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadQuestions: () => {
       return dispatch({ type: "FETCH_QUIZ_LIST" });
+    },
+    updateScore: () => {
+      return dispatch({ type: "CORRECT_ANSWER" });
+    },
+    showResutls: () => {
+      return dispatch({ type: "QUIZ_COMPLETED" });
     },
   };
 };

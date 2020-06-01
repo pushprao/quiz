@@ -16,7 +16,7 @@ const Question = (props) => {
                 name="answer"
                 id={index}
                 onChange={(e) => {
-                  props.updateScore(e, index);
+                  props.selectedAnswer(e, index);
                 }}
               />
               {answerText}
