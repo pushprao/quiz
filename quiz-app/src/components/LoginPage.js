@@ -15,7 +15,6 @@ class LoginPage extends Component {
   state = {
     email: "",
     password: "",
-    auhtenticated: false,
     validate: {
       emailState: "",
     },
@@ -92,7 +91,9 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    auhtenticated: state.login.authenticated,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
