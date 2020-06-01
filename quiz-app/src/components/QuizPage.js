@@ -55,7 +55,11 @@ class QuizPage extends Component {
           <>
             <div className="questionArea">
               {this.state.showResults && (
-                <Results quizList={questions} score={this.state.score} />
+                <Results
+                  quizList={questions}
+                  score={this.state.score}
+                  userId={this.props.userId}
+                />
               )}
               {!this.state.showResults && questions.length && (
                 <Question
@@ -108,6 +112,7 @@ const mapStateToProps = (state) => {
   return {
     questions: state.quiz.questions,
     loading: state.quiz.loading,
+    userId: state.login.email,
   };
 };
 

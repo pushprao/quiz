@@ -9,6 +9,7 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import { connect } from "react-redux";
 
 class LoginPage extends Component {
   state = {
@@ -31,7 +32,7 @@ class LoginPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Login with email:" + this.state.email);
+    this.props.login(this.state.email);
     const { history } = this.props;
     history.push("/quiz");
   };
@@ -90,4 +91,16 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (email) => {
+      return dispatch({ type: "LOGGED_IN", email });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

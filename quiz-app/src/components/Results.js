@@ -7,6 +7,9 @@ class Results extends Component {
       <section className="resultsSection">
         <h2>Results</h2>
         <div className="scoring">
+          <span className={"blink"}>User : {this.props.userId}</span>
+        </div>
+        <div className="scoring">
           <span className={"blink"}>
             You scored {this.props.score} out of {this.props.quizList.length}
           </span>
