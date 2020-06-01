@@ -7,7 +7,9 @@ class Results extends Component {
       <section className="resultsSection">
         <h2>Results</h2>
         <div className="scoring">
-          You got {this.props.score} out of {this.props.quizList.length}
+          <span className={"blink"}>
+            You scored {this.props.score} out of {this.props.quizList.length}
+          </span>
         </div>
         <ol>
           {this.props.quizList.map((quizData, index) => {

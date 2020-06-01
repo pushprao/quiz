@@ -9,7 +9,6 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import { Redirect } from "react-router-dom";
 
 class LoginPage extends Component {
   state = {

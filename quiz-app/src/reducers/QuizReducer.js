@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
   questions: [],
-  authenticated: false,
   error: null,
   loading: false,
 };

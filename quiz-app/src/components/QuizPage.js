@@ -4,12 +4,16 @@ import Question from "./Question";
 import Button from "reactstrap/es/Button";
 import Results from "./Results";
 import Spinner from "reactstrap/es/Spinner";
+import { connect } from "react-redux";
 
+// TODO: configure babel-transform-decorators-legacy plugin
+// @connect((store) => {
+//   return { questions: store.questions };
+// })
 class QuizPage extends Component {
   state = {
     currentQuestion: 0,
     next: true,
-    loading: true,
     score: 0,
     showResults: false,
   };
@@ -37,6 +41,10 @@ class QuizPage extends Component {
       this.setState({ score: this.state.score + 1 });
     }
   };
+
+  componentDidMount() {
+    this.props.loadQuestions();
+  }
 
   render() {
     const { currentQuestion } = this.state;
@@ -96,4 +104,19 @@ class QuizPage extends Component {
   }
 }
 
-export default QuizPage;
+const mapStateToProps = (state) => {
+  return {
+    questions: state.quiz.questions,
+    loading: state.quiz.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadQuestions: () => {
+      return dispatch({ type: "FETCH_QUIZ_LIST" });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizPage);

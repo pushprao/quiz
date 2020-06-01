@@ -9,7 +9,24 @@
 
 .resultsSection .scoring {
   text-align: left;
-  /*margin-top: -8px;*/
+  margin-top: 18px;
+  font-size: 2em;
+}
+
+span.blink {
+  animation: blinkingText 1s infinite;
+}
+
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
 }
 
 .resultsSection .result {
