@@ -16,11 +16,20 @@ class Results extends Component {
         </div>
         <ol>
           {this.props.quizList.map((quizData, index) => {
+            var correctAnswer = quizData.options[quizData.correct];
+            var yourAnswer = quizData.options[this.props.answers[index]];
+
             return (
-              <li className="result" key={index}>
+              <li
+                className={
+                  "result" +
+                  (yourAnswer === correctAnswer ? " correct" : " incorrect")
+                }
+                key={index}
+              >
                 <div>{quizData.quiz}</div>
                 <div className="correctAnswer">
-                  <b>{quizData.options[quizData.correct]}</b>
+                  <b>Answer: {correctAnswer}</b>
                 </div>
               </li>
             );

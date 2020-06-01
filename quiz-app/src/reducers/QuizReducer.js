@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
   questions: [],
+  answers: [],
   error: null,
   loading: false,
   quizCompleted: false,
@@ -26,7 +27,15 @@ export function QuizReducer(state = INITIAL_STATE, action) {
         ...state,
         loading: true,
       };
-    case "CORRECT_ANSWER":
+    case "UPDATE_ANSWERS":
+      return {
+        ...state,
+        answers: {
+          ...state.answers,
+          [action.answer.questionId]: action.answer.option,
+        },
+      };
+    case "UPDATE_SCORE":
       return {
         ...state,
         score: state.score + 1,

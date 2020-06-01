@@ -36,6 +36,7 @@ class QuizPage extends Component {
     if (this.props.questions[this.state.currentQuestion].correct === index) {
       this.props.updateScore();
     }
+    this.props.updateAnswers(this.state.currentQuestion, index);
   };
 
   componentDidMount() {
@@ -55,6 +56,7 @@ class QuizPage extends Component {
                   quizList={questions}
                   score={this.props.score}
                   userId={this.props.userId}
+                  answers={this.props.answers}
                 />
               )}
               {!quizCompleted && questions.length && (
@@ -110,6 +112,7 @@ const mapStateToProps = (state) => {
     userId: state.login.email,
     quizCompleted: state.quiz.quizCompleted,
     score: state.quiz.score,
+    answers: state.quiz.answers,
   };
 };
 
@@ -119,7 +122,15 @@ const mapDispatchToProps = (dispatch) => {
       return dispatch({ type: "FETCH_QUIZ_LIST" });
     },
     updateScore: () => {
-      return dispatch({ type: "CORRECT_ANSWER" });
+      return dispatch({
+        type: "UPDATE_SCORE",
+      });
+    },
+    updateAnswers: (questionId, option) => {
+      return dispatch({
+        type: "UPDATE_ANSWERS",
+        answer: { questionId, option },
+      });
     },
     showResutls: () => {
       return dispatch({ type: "QUIZ_COMPLETED" });

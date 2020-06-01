@@ -52,14 +52,14 @@ span.blink {
 
 .resultsSection .result.correct:before {
   content: "\002714";
-  color: #7aca7c;
-  top: -20px;
+  color: rgba(32, 87, 50, 0.91);
+  top: -10px;
 }
 
 .resultsSection .result.incorrect:before {
   content: "\2716";
-  color: #e96a6a;
-  top: -18px;
+  color: #790707;
+  top: -10px;
 }
 
 .resultsSection .correctAnswer b {
